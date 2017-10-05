@@ -469,34 +469,9 @@
               <FilePath>.\Thread_LED.c</FilePath>
             </File>
             <File>
-              <FileName>Thread_Blinky.c</FileName>
+              <FileName>Blinky_Tasks.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Thread_Blinky.c</FilePath>
-            </File>
-            <File>
-              <FileName>Thread_Blinky2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Thread_Blinky2.c</FilePath>
-            </File>
-            <File>
-              <FileName>Thread_Blinky3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Thread_Blinky3.c</FilePath>
-            </File>
-            <File>
-              <FileName>Thread_Blinky4.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Thread_Blinky4.c</FilePath>
-            </File>
-            <File>
-              <FileName>UpdateRates.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\UpdateRates.c</FilePath>
-            </File>
-            <File>
-              <FileName>UpdateRates.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\UpdateRates.h</FilePath>
+              <FilePath>.\Blinky_Tasks.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -984,34 +959,9 @@
               <FilePath>.\Thread_LED.c</FilePath>
             </File>
             <File>
-              <FileName>Thread_Blinky.c</FileName>
+              <FileName>Blinky_Tasks.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Thread_Blinky.c</FilePath>
-            </File>
-            <File>
-              <FileName>Thread_Blinky2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Thread_Blinky2.c</FilePath>
-            </File>
-            <File>
-              <FileName>Thread_Blinky3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Thread_Blinky3.c</FilePath>
-            </File>
-            <File>
-              <FileName>Thread_Blinky4.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Thread_Blinky4.c</FilePath>
-            </File>
-            <File>
-              <FileName>UpdateRates.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\UpdateRates.c</FilePath>
-            </File>
-            <File>
-              <FileName>UpdateRates.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\UpdateRates.h</FilePath>
+              <FilePath>.\Blinky_Tasks.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1499,34 +1449,9 @@
               <FilePath>.\Thread_LED.c</FilePath>
             </File>
             <File>
-              <FileName>Thread_Blinky.c</FileName>
+              <FileName>Blinky_Tasks.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\Thread_Blinky.c</FilePath>
-            </File>
-            <File>
-              <FileName>Thread_Blinky2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Thread_Blinky2.c</FilePath>
-            </File>
-            <File>
-              <FileName>Thread_Blinky3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Thread_Blinky3.c</FilePath>
-            </File>
-            <File>
-              <FileName>Thread_Blinky4.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Thread_Blinky4.c</FilePath>
-            </File>
-            <File>
-              <FileName>UpdateRates.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\UpdateRates.c</FilePath>
-            </File>
-            <File>
-              <FileName>UpdateRates.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\UpdateRates.h</FilePath>
+              <FilePath>.\Blinky_Tasks.c</FilePath>
             </File>
           </Files>
         </Group>

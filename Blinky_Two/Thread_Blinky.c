@@ -1,7 +1,7 @@
 
 #include "cmsis_os.h"                   // ARM::CMSIS:RTOS:Keil RTX
 #include "Board_LED.h"                  // ::Board Support:LED
-#include "UpdateRates.h"								// Contains mailbox data structures
+//#include "UpdateRates.h"								// Contains mailbox data structures
 
 /*----------------------------------------------------------------------------
  *      Thread 1 'Thread_Blinky1': LED thread
@@ -29,10 +29,10 @@ void Thread_Blinky1 (void const *argument) {
 	uint32_t delay_value = 0; //The amount to delay the blink
 
   while (1) {
-		osEvent event = osMailGet(object_pool_q_id_1, osWaitForever);
-		blink_data *received = (blink_data *)event.value.p;       // ".p" indicates that the message is a pointer
-		delay_value = received->blink_rate;
-		osMailFree(object_pool_q_id_1, received);
+//		osEvent event = osMailGet(object_pool_q_id_1, osWaitForever);
+//		blink_data *received = (blink_data *)event.value.p;       // ".p" indicates that the message is a pointer
+//		delay_value = received->blink_rate;
+//		osMailFree(object_pool_q_id_1, received);
     LED_On(led_num);                    // Turn specified LED on
 		osDelay(delay_value);
     LED_Off(led_num);                   // Turn specified LED off

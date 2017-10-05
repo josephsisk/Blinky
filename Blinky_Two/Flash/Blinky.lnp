@@ -1,11 +1,7 @@
 --cpu=Cortex-M4.fp
 ".\flash\blinky.o"
 ".\flash\thread_led.o"
-".\flash\thread_blinky.o"
-".\flash\thread_blinky2.o"
-".\flash\thread_blinky3.o"
-".\flash\thread_blinky4.o"
-".\flash\updaterates.o"
+".\flash\blinky_tasks.o"
 ".\flash\buttons_f4discovery.o"
 ".\flash\led_f4discovery.o"
 "C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.0.1\CMSIS\RTOS\RTX\LIB\ARM\RTX_CM4.lib"
