@@ -7,7 +7,7 @@
  *      Thread 1 'Update_Rates': LED Blink Rate Controller
  *---------------------------------------------------------------------------*/
  
-int random_seed = 111; //Used for calculating pseudo-random blink times
+uint32_t random_seed = 111; //Used for calculating pseudo-random blink times
  
 void Update_Rates (void const *argument);                 // thread function
 osThreadId tid_Update_Rates;                              // thread id
