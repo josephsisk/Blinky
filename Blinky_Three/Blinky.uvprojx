@@ -486,6 +486,9 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>New Group</GroupName>
+        </Group>
+        <Group>
           <GroupName>::Board Support</GroupName>
         </Group>
         <Group>
@@ -976,6 +979,9 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>New Group</GroupName>
+        </Group>
+        <Group>
           <GroupName>::Board Support</GroupName>
           <GroupOption>
             <CommonProperty>
@@ -1464,6 +1470,9 @@
               <FilePath>.\Abstract.txt</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>New Group</GroupName>
         </Group>
         <Group>
           <GroupName>::Board Support</GroupName>

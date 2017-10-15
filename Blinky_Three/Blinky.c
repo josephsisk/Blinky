@@ -96,7 +96,7 @@ int main (void) {
   osKernelStart();                          /* start thread execution         */
 
   while (1) {
-    while (Buttons_GetState() & 1U);        /* Wait while holding USER button */
+//    while (Buttons_GetState() & 1U);        /* Wait while holding USER button */
 //    osSignalSet(tid_Thread_LED, 1U);        /* Signal LED thread              */
 //    osDelay(500);                           /* Wait 500ms                     */
   }

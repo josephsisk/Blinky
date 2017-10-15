@@ -3,12 +3,19 @@
 #include "Board_LED.h"                  // ::Board Support:LED
 //#include "UpdateRates.h"								// Contains mailbox data structures
 #include "Board_Buttons.h"
+//#include "stm32f4xx_exti.h"
+#include "stm32f4xx_hal_def.h"
+#include "stm32f4xx_hal_gpio.h"
+
 
 /*----------------------------------------------------------------------------
  *      Thread 1 'Update_Rates': LED Blink Rate Controller
  *---------------------------------------------------------------------------*/
  
 uint32_t random_seed = 111; //Used for calculating pseudo-random blink times
+uint32_t blink_rate_cycle = 5; //Blink rate (seconds)
+
+void Change_Blink_Rates(void);
  
 void Update_Rates (void const *argument);                 // thread function
 osThreadId tid_Update_Rates;                              // thread id
@@ -35,6 +42,53 @@ osMailQId  (object_pool_q_id_2);                 // Mail queue ID
 osMailQId  (object_pool_q_id_3);                 // Mail queue ID
 osMailQId  (object_pool_q_id_4);                 // Mail queue ID
 
+void Init_Mail_Queues()
+{
+	#ifndef OBJECT_POOLS
+	#define OBJECT_POOLS
+	object_pool_q_id_1 = osMailCreate(osMailQ(object_pool_q_1), NULL); //Create the mail pool
+	object_pool_q_id_2 = osMailCreate(osMailQ(object_pool_q_2), NULL); //Create the mail pool
+	object_pool_q_id_3 = osMailCreate(osMailQ(object_pool_q_3), NULL); //Create the mail pool
+	object_pool_q_id_4 = osMailCreate(osMailQ(object_pool_q_4), NULL); //Create the mail pool
+	#endif
+}
+
+void Button_Handler(void)
+{
+	Change_Blink_Rates();
+}
+
+void Button_Watch (void const *argument) {
+	  GPIO_InitTypeDef pinConfig;
+  pinConfig.Pin = GPIO_PIN_0;
+  pinConfig.Pull = GPIO_NOPULL;
+  pinConfig.Mode = GPIO_MODE_OUTPUT_PP;
+  pinConfig.Speed = GPIO_SPEED_FAST;
+  HAL_GPIO_Init(GPIOA, &pinConfig);
+
+	Buttons_Initialize();
+	
+	Init_Mail_Queues();
+	
+	//Allocate the mail queues
+	blink_data_1 = (blink_data *) osMailAlloc(object_pool_q_id_1, osWaitForever);
+	blink_data_2 = (blink_data *) osMailAlloc(object_pool_q_id_2, osWaitForever);
+	blink_data_3 = (blink_data *) osMailAlloc(object_pool_q_id_3, osWaitForever);
+	blink_data_4 = (blink_data *) osMailAlloc(object_pool_q_id_4, osWaitForever);
+	
+  while (1) {
+		if(Buttons_GetState() > 0)
+		{
+			Button_Handler();
+			while(Buttons_GetState() > 0)
+			{
+				osDelay(10); //Wait
+			}
+		}
+		osDelay(10); //Wait
+  }
+}
+
 int Init_Update_Rates (void) {
 
   tid_Update_Rates = osThreadCreate(osThread(Update_Rates), NULL);
@@ -55,30 +109,8 @@ int Get_Blink_Rate(int max_ms)
 	return returnVal;
 }
 
-void Init_Mail_Queues()
+void Change_Blink_Rates()
 {
-	#ifndef OBJECT_POOLS
-	#define OBJECT_POOLS
-	object_pool_q_id_1 = osMailCreate(osMailQ(object_pool_q_1), NULL); //Create the mail pool
-	object_pool_q_id_2 = osMailCreate(osMailQ(object_pool_q_2), NULL); //Create the mail pool
-	object_pool_q_id_3 = osMailCreate(osMailQ(object_pool_q_3), NULL); //Create the mail pool
-	object_pool_q_id_4 = osMailCreate(osMailQ(object_pool_q_4), NULL); //Create the mail pool
-	#endif
-}
-
-void Update_Rates (void const *argument) {
-//  uint32_t led_num = 0;
-	Init_Mail_Queues();
-	Buttons_GetState();
-	
-	//Allocate the mail queues
-	blink_data_1 = (blink_data *) osMailAlloc(object_pool_q_id_1, osWaitForever);
-	blink_data_2 = (blink_data *) osMailAlloc(object_pool_q_id_2, osWaitForever);
-	blink_data_3 = (blink_data *) osMailAlloc(object_pool_q_id_3, osWaitForever);
-	blink_data_4 = (blink_data *) osMailAlloc(object_pool_q_id_4, osWaitForever);
-
-  while (1) {
-//		int blink_rate = Get_Blink_Rate(2000);
 		blink_data_1->blink_rate = Get_Blink_Rate(2000);
 		blink_data_2->blink_rate = Get_Blink_Rate(2000);
 		blink_data_3->blink_rate = Get_Blink_Rate(2000);
@@ -87,8 +119,37 @@ void Update_Rates (void const *argument) {
 		osMailPut(object_pool_q_id_2, blink_data_2);
 		osMailPut(object_pool_q_id_3, blink_data_3);
 		osMailPut(object_pool_q_id_4, blink_data_4);
-		osDelay(5000); //Wait 5 seconds
-  }
+}
+
+void Update_Rates (void const *argument) {
+//  uint32_t led_num = 0;
+	
+	Init_Mail_Queues();
+	
+	//Allocate the mail queues
+	blink_data_1 = (blink_data *) osMailAlloc(object_pool_q_id_1, osWaitForever);
+	blink_data_2 = (blink_data *) osMailAlloc(object_pool_q_id_2, osWaitForever);
+	blink_data_3 = (blink_data *) osMailAlloc(object_pool_q_id_3, osWaitForever);
+	blink_data_4 = (blink_data *) osMailAlloc(object_pool_q_id_4, osWaitForever);
+
+	while(1)
+	{
+		if(Buttons_GetState() > 0)
+		{
+			Button_Handler();
+			while(Buttons_GetState() > 0)
+			{
+				osDelay(10); //Wait
+			}
+		}
+		osDelay(10); //Wait
+	}
+	
+//  while (1) {
+////		int blink_rate = Get_Blink_Rate(2000);
+//		Change_Blink_Rates();
+//		osDelay(blink_rate_cycle * 1000); //Wait
+//  }
 }
 
 /*----------------------------------------------------------------------------
@@ -122,10 +183,6 @@ void Thread_Blinky1 (void const *argument) {
 			osMailFree(object_pool_q_id_1, received);
 		}
     LED_On(led_num);                    // Turn specified LED on
-		while(Buttons_GetState() > 0)
-		{
-			//Keep LED on while holding button
-		}
 		osDelay(delay_value);
     LED_Off(led_num);                   // Turn specified LED off
 		osDelay(delay_value);
